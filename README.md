@@ -1,5 +1,6 @@
 # HumanSec
-Toolbox for generating protein-secretion genome-scale model for Human
+Toolbox for generating protein-secretion genome-scale model for Human.
+
 To test this toolbox and generate a protein-specific genome-scale model you just need to run humanSec.m function. This function needs following inputs:
   1) A model (HMR2 or HMR2-drived models)
   2) Uniprot ID for your interested protein
