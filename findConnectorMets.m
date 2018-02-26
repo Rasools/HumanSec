@@ -2,7 +2,7 @@ function connectors=findConnectorMets(model, addedRxns)
   % for finding connector metabolites between protein secretory pathway and other pathways. Maybe useful for gap filling purposes.
   %
   %
-  % model     A genome scale metaboic model like hmr2. This model should not have secretory pathway.
+  % model       A genome scale metaboic model like hmr2. This model should not have secretory pathway.
   % addedRxns   a data structure produced by humanSec function.
   %
   % connectors    an string array of connector metabolites
