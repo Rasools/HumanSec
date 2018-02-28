@@ -289,7 +289,7 @@ function [secModel, addedRxns]=humanSec(model, protein, psim, tempRxns)
       end
       %------------------------------------------------------------------------------
       %Add Clathrin vesicles
-    elseif  strcmp(psim.location(p_row),'[x]') == 1 || strcmp(psim.location(p_row),'[l]') == 1
+    elseif  strcmp(psim.location(p_row),'[p]') == 1 || strcmp(psim.location(p_row),'[l]') == 1
       rxns = vertcat(rxns,strcat(connector, {' => XXX-preClathrin[g]'}));
       rxnNames = vertcat(rxnNames,{'Start_Clathrin_vesicle'});
       clath_rxns = {};
