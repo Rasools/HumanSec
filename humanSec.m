@@ -1,4 +1,4 @@
-function [secModel, addedRxns]=humanSec2(model, protein, psim, tempRxns)
+function [secModel, addedRxns]=humanSec(model, protein, psim, tempRxns)
   % humanSec
   %   This script contains functions to create a list of protein-specific reactions
   %   for the protein secretion pathway in HMR2s.
@@ -46,6 +46,9 @@ function [secModel, addedRxns]=humanSec2(model, protein, psim, tempRxns)
   %   Usage: [secModel, addedRxns]=humanSec(model, proToAdd)
   %
   %   Rasool Saghaleyni, 2018-02-16
+  %                      2019-02-07   
+  
+  
   p_row = find(ismember(psim.entry,protein)); %protein row in psim
   sequence = char(psim.sequence(p_row));
   length = psim.length(p_row);
@@ -383,7 +386,7 @@ function [secModel, addedRxns]=humanSec2(model, protein, psim, tempRxns)
   geneList = unique(geneList);
   genesToAdd.genes = setdiff(geneList,secModel.genes);
   genesToAdd.genes = genesToAdd.genes(~cellfun('isempty', genesToAdd.genes));
-  secModel = addGenes(secModel,genesToAdd);
+  secModel = addGenesRaven(secModel,genesToAdd);
   secModel.geneComps(:,1) = 4;
   %------------------------------------------------------------------------------
   %find and add new metabolites to secModel
@@ -405,7 +408,7 @@ function [secModel, addedRxns]=humanSec2(model, protein, psim, tempRxns)
   rxnsToAdd.subSystems(1:numel(rxnsToAdd.rxnNames)) = {'protein secretion'};
 
   com = Comps(ismember(rxnNames,secModel.rxns) == 0);
-  %Add protein secretion reactions to HMR2-drived model and modify grule Matrix
+  %Add protein secretion reactions to human1-drived model and modify grule Matrix
   secModel = addRxns(secModel,rxnsToAdd,3,[],false);
   %Add compartments for new reactions
   %secModel.rxnComps(numel(model.rxns)+1:numel(secModel.rxns)) = com(1:end);
