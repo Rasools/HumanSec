@@ -387,18 +387,18 @@ function [secModel, addedRxns]=humanSec(model, protein, psim, tempRxns)
   genesToAdd.genes = setdiff(geneList,secModel.genes);
   genesToAdd.genes = genesToAdd.genes(~cellfun('isempty', genesToAdd.genes));
   secModel = addGenesRaven(secModel,genesToAdd);
-  secModel.geneComps(:,1) = 4;
   %------------------------------------------------------------------------------
   %find and add new metabolites to secModel
   metList = parseRxnEqu(rxns);
   outModel = addCompartmentalizedMetNames(secModel);
   newMets = setdiff(metList,outModel.metNamesC); %list of new metabolites with their compartment.
-  [newNames, newComps] = splitComp(newMets);
-  metsToAdd.mets = newNames;
-  metsToAdd.compartments = newComps;
-  metsToAdd.metNames = newNames;
-  secModel = addMets(secModel,metsToAdd);
-
+  if isempty(newMets) == 0
+    [newNames, newComps] = splitComp(newMets);
+    metsToAdd.mets = newMets;
+    metsToAdd.compartments = newComps;
+    metsToAdd.metNames = newNames;
+    secModel = addMets(secModel,metsToAdd);
+  end
   %------------------------------------------------------------------------------
   %finding reactions which are not in the model
   rxnsToAdd.rxns = rxnNames(ismember(rxnNames,secModel.rxns) == 0);
