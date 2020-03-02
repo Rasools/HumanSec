@@ -8,7 +8,7 @@ function comp_list=getCompsFromRxnNames(listOfRxnsNames, tempRxns)
   %
   %
   %
-  % Rasool Saghaleyni, 2018-02-16
+  % Rasool Saghaleyni, 2020-02-22
   comp_list = {};
   %print listOfRxnsNames
   for i = 1:numel(listOfRxnsNames)

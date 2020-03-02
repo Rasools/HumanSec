@@ -13,7 +13,7 @@ function newModel = copyRxn(model,refModel,rxnList)
   %
   %
   %
-  %
+  % Rasool Saghaleyni, 2020-02-22
   rxns_ind = find(ismember(refModel.rxns,rxnList));
   rxnsToAdd.rxns = refModel.rxns(rxns_ind);
   rxnsToAdd.equations = constructEquations(refModel,rxnList);

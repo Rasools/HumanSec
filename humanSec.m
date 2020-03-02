@@ -47,7 +47,7 @@ function [secModel, addedRxns]=humanSec(model, protein, psim, tempRxns)
   %
   %   Rasool Saghaleyni, 2018-02-16
   %                      2019-02-07   
-  
+  %                      2020-03-01
   
   p_row = find(ismember(psim.entry,protein)); %protein row in psim
   sequence = char(psim.sequence(p_row));

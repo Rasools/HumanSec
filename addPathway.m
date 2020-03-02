@@ -20,7 +20,7 @@ function [newList, newList2]=addPathway(pathwayName,listOfRxns,listOfRxnsNames,t
   %
   %
   %
-  % Rasool Saghaleyni, 2018-02-16
+  % Rasool Saghaleyni, 2019-02-16
   newList = listOfRxns;
   newList2 = listOfRxnsNames;
   for i=1:numel(tempRxns.Pathway)

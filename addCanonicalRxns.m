@@ -10,7 +10,7 @@ function [newListRxns, newListNames, newListGPRs, newListComps]=addCanonicalRxns
   %
   %
   %
-  % Rasool Saghaleyni, 2018-02-16
+  % Rasool Saghaleyni, 2020-02-22
   newListRxns = listOfRxns;
   newListNames = listOfRxnNames;
   newListGPRs = listOfGPRs;

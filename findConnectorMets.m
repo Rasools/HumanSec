@@ -13,7 +13,7 @@ function connectors=findConnectorMets(model, addedRxns, protein)
   %
   %
   %
-  % Rasool Saghaleyni, 2018-02-16
+  % Rasool Saghaleyni, 2020-02-16
   outModel   = addCompartmentalizedMetNames(model);
   metabolites = parseRxnEqu(addedRxns.rxnFormula);
   connectors = intersect(outModel.metNamesC,metabolites);
