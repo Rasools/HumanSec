@@ -150,7 +150,7 @@ function [ihumanSec, secRxns]=genericHumanSec(ihuman, tempRxns)
   rxnNames = vertcat(rxnNames,NGlyrxnNames);
   connector = 'XXX-M8B[r]';
   %------------------------------------------------------------------------------
-%Add  COPII reactions
+  %Add  COPII reactions
   copii_rxns = {};
   copii_names = {};
   [copii_rxns, copii_names] = addPathway('COPII_NG',copii_rxns,copii_names,tempRxns);
