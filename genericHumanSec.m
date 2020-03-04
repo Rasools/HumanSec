@@ -239,12 +239,12 @@ function [ihumanSec, secRxns]=genericHumanSec(ihuman, tempRxns)
   for i = 1:numel(copi_rxns)
     copi_rxns(i) = strrep(copi_rxns(i),'!',num2str(copi_coeff));
   end
-  rxns = vertcat(rxns,copi_rxns(i));
-  rxnNames = vertcat(rxnNames,copi_names(i));
+  rxns = vertcat(rxns,copi_rxns);
+  rxnNames = vertcat(rxnNames,copi_names);
   connector = 'XXX_mature[r]';
 
   rxns = vertcat(rxns,strcat(connector, {' => '}));
-  rxnNames = vertcat(rxnNames,strcat(protein,{'_Final_demand'}));
+  rxnNames = vertcat(rxnNames,strcat(protein,{'_Final_demand_r'}));
   
   rxns = vertcat(rxns,strcat(connector,{' => XXX_mature'},'[rm]'));
   rxnNames = vertcat(rxnNames,strcat({'Final_location_rm'}));
@@ -288,7 +288,7 @@ function [ihumanSec, secRxns]=genericHumanSec(ihuman, tempRxns)
   rxnNames = vertcat(rxnNames,sv_names);
 
   rxns = vertcat(rxns,strcat({'XXX_mature[sv]'},{' => XXX_mature'},'[s]'));
-  rxnNames = vertcat(rxnNames,strcat({'Final_location_s'},location));
+  rxnNames = vertcat(rxnNames,strcat({'Final_location_s'}));
   rxns = vertcat(rxns,strcat({'XXX_mature'},'[s]',{' => '}));
   rxnNames = vertcat(rxnNames,strcat(protein,{'_Final_demand_s'}));
   %------------------------------------------------------------------------------

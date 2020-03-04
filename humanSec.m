@@ -282,8 +282,8 @@ function [secModel, addedRxns]=humanSec(model, protein, psim, tempRxns)
       for i = 1:numel(copi_rxns)
         copi_rxns(i) = strrep(copi_rxns(i),'!',num2str(copi_coeff));
       end
-      rxns = vertcat(rxns,copi_rxns(i));
-      rxnNames = vertcat(rxnNames,copi_names(i));
+      rxns = vertcat(rxns,copi_rxns);
+      rxnNames = vertcat(rxnNames,copi_names);
       connector = 'XXX_mature[r]';
       location = psim.location(p_row);
       if strcmp(psim.location(p_row),'[r]') == 1
