@@ -228,7 +228,6 @@ function [ihumanSec, secRxns]=genericHumanSec(ihuman, tempRxns)
   GPRs = vertcat(GPRs,{});
   Comps = vertcat(Comps,'gm');
 
-  [rxns,rxnNames,GPRs, Comps] = addCanonicalRxns(rxns,rxnNames,GPRs, Comps, tempRxns);
   %------------------------------------------------------------------------------
   %Add COPI
   rxns = vertcat(rxns,strcat(connector, {' => XXX_preCOPI[g]'}));
