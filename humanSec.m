@@ -394,9 +394,9 @@ function [secModel, addedRxns]=humanSec(model, protein, psim, tempRxns)
   newMets = setdiff(metList,outModel.metNamesC); %list of new metabolites with their compartment.
   if isempty(newMets) == 0
     [newNames, newComps] = splitComp(newMets);
-    metsToAdd.mets = newMets;
     metsToAdd.compartments = newComps;
     metsToAdd.metNames = newNames;
+    metsToAdd.mets = strcat(metsToAdd.metNames,metsToAdd.compartments);
     secModel = addMets(secModel,metsToAdd);
   end
   %------------------------------------------------------------------------------

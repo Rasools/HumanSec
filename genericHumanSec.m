@@ -1,4 +1,4 @@
-function [ihumanSec, secRxns]=genericHumanSec(ihuman, tempRxns)
+function [ihumanSec, secAddon]=genericHumanSec(ihuman, tempRxns)
   % humanSec
   %   This script generates and adds all secretory reactions to generic metabolic model of human (ihuman)
   %
@@ -343,9 +343,9 @@ function [ihumanSec, secRxns]=genericHumanSec(ihuman, tempRxns)
   newMets = setdiff(metList,outModel.metNamesC); %list of new metabolites with their compartment.
   if isempty(newMets) == 0
     [newNames, newComps] = splitComp(newMets);
-    metsToAdd.mets = newMets;
     metsToAdd.compartments = newComps;
     metsToAdd.metNames = newNames;
+    metsToAdd.mets = strcat(metsToAdd.metNames,metsToAdd.compartments);
     secModel = addMets(secModel,metsToAdd);
   end
   %------------------------------------------------------------------------------
@@ -355,19 +355,22 @@ function [ihumanSec, secRxns]=genericHumanSec(ihuman, tempRxns)
   rxnsToAdd.rxnNames = rxnNames(ismember(rxnNames,secModel.rxns) == 0);
   rxnsToAdd.grRules = GPRs(ismember(rxnNames,secModel.rxns) == 0);
   rxnsToAdd.subSystems(1:numel(rxnsToAdd.rxnNames),1) = {'protein secretion'};
-
-  com = Comps(ismember(rxnNames,secModel.rxns) == 0);
+  %------------------------------------------------------------------------------
   %Add protein secretion reactions to human1-drived model and modify grule Matrix
   secModel = addRxns(secModel,rxnsToAdd,3,[],false);
-  %Add compartments for new reactions
-  %secModel.rxnComps(numel(model.rxns)+1:numel(secModel.rxns)) = com(1:end);
-  ihumanSec = secModel;
   %------------------------------------------------------------------------------
-  addedRxns.rxnsNames = rxnsToAdd.rxns;
-  addedRxns.rxnFormula = rxnsToAdd.equations;
-  addedRxns.rxnGPRs = rxnsToAdd.grRules;
-  addedRxns.rxnComps = com;
-  addedRxns.newMets = newMets;
-  addedRxns.newGens = genesToAdd.genes;
-  secRxns = addedRxns;
+  [justConsumedMets, justProducedMets]=findRootDeadEndMets(secModel);
+  justConsumedMets_sec = intersect(metsToAdd.mets,justConsumedMets);
+  justProducedMets_sec = intersect(metsToAdd.mets,justProducedMets);
+  if size(justConsumedMets_sec,1)~=0
+    [secModel, ~ ]=addExchangeRxns(secModel, 'in', justConsumedMets_sec);
+  end
+  if size(justProducedMets_sec,1)~=0
+    [secModel, ~ ]=addExchangeRxns(secModel, 'out', justProducedMets_sec);
+  end
+  ihumanSec=secModel;
+  %------------------------------------------------------------------------------
+  rxns2rm=intersect(ihumanSec.rxns,ihuman.rxns);
+  secAddon=removeReactions(ihumanSec,rxns2rm,1,1,1);
+  %------------------------------------------------------------------------------
 end
