@@ -1,4 +1,4 @@
-function [justConsumedMets, justProducedMets]=findRootDeadEndMets(model)
+function [justConsumedMets, justProducedMets, id_cons, id_prod]=findRootDeadEndMets(model)
   %   This script will find metabolites which are just produced or just 
   %   consumed in the reactions. These metabolites cause
   %   deadEnd reactions.
@@ -17,13 +17,13 @@ function [justConsumedMets, justProducedMets]=findRootDeadEndMets(model)
   uniModel=removeReactions(model,model.rxns(model.rev==1));
   % generate a model just containing both directional reactions
   forwModel=removeReactions(model,model.rxns(model.rev==0));
-  % fixing directionality of direction
+  % fixing directionality of reaction to uni-directional
   forwModel.rev(:,1) = 0;
   % generate a model just containing both directional reactions
   revModel=removeReactions(model,model.rxns(model.rev==0));
   % change directionality of reaction to reverse
   revModel.S=-revModel.S;
-  % fixing directionality of direction
+  % fixing directionality of reaction to uni-directional
   revModel.rev(:,1) = 0;
   % adding removed reactions to main model
   newModel=mergeModels({uniModel,forwModel,revModel});
@@ -38,6 +38,8 @@ function [justConsumedMets, justProducedMets]=findRootDeadEndMets(model)
   end
   % if you add this metabolites to the model using addExchangeRxns function, there will
   % not be any deadEnd reaction in the model.
+  id_cons = find(strcmp(all_mets,'cons'));
+  id_prod = find(strcmp(all_mets,'prod'));
   justConsumedMets=newModel.mets(strcmp(all_mets,'cons'));
   justProducedMets=newModel.mets(strcmp(all_mets,'prod'));
 end
