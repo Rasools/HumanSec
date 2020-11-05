@@ -67,7 +67,7 @@ function [secModel, addedRxns]=humanSec(model, protein, psim, tempRxns)
   rxnNames(1) = {'TRANSLATION_protein'};
   secModel = model;
   secModel.description = char('human protein-specific secretory model');
-  secModel.id = char(strcat('HumanSec_',protein));
+  secModel.id = char(strcat('HumanSec_',model.id));
   % Add secretory compartements
   comps = {'sv';'cv';'rm';'gm';'pm'};
   compNames = {'secretory vesicle';'clathrin vesicle';'ER membrane';'Golgi membrane';'Plasma membrane'};
