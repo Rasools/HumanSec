@@ -1,5 +1,5 @@
 # HumanSec
-Toolbox for generating protein-secretion genome-scale model for Human.
+Toolbox for generating protein-secretion genome-scale metabolic models based on Human GEM.
 
 To test this toolbox and generate a protein-specific genome-scale model you just need to run humanSec.m function. This function needs following inputs:
   1) A GEM model (Human1 or Human1-drived models) specialized to support protein secretory reactions. you can always find  latest version of this model in input folder named as ihumanSec.
